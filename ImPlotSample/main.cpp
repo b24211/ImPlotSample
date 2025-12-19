@@ -1,70 +1,34 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <Windows.h>
-#undef SIZE
-#include <cmath>
-#include <iostream>
+﻿#include <iostream>
 #include <string>
-#include <vector>
-#include <complex>
-
-#include <visa.h>
-#include "sub_visa.h"
-#include "Gui.h"
-#include "Butterworth.h"
-
-#define PI acos(-1)
-#define SIZE 32768
-#define DT (0.1/SIZE)
-
-// ImGuiのWindowの関数
-void ShowWindow1(const char title[]);
+#include "AppApps.h" // 共通ヘッダーをインクルード
 
 int main() {
-    // GUI初期化
-    Gui::Initialize(
-        "ImPlot sample",
-        0, 30, 1100, 780
-    );
-    if (Gui::GetWindow() == nullptr) {
-        std::cerr << "[Error] Failed to initialize GUI\n";
+    int choice = 0;
+
+    std::cout << "========================================\n";
+    std::cout << " Select Application to Run:\n";
+    std::cout << "========================================\n";
+    std::cout << " 1. Waveform Analysis & Filter (251217)\n";
+    std::cout << " 2. Bode Plot & Sweep Control  (251218)\n";
+    std::cout << "========================================\n";
+    std::cout << " Enter number (1 or 2): ";
+
+    if (!(std::cin >> choice)) {
+        std::cout << "Invalid input.\n";
         return -1;
     }
 
-    // メインループ
-    while (!glfwWindowShouldClose(Gui::GetWindow())) {
-        // フレーム開始
-        Gui::BeginFrame();
-
-        // ウィンドウ描画
-        /*** 描画したいImGuiのWindowをここに記述する ***/
-        ShowWindow1("Generate waveform");
-
-        // フレーム描画・スワップ
-        Gui::EndFrame();
+    // 選択に応じてそれぞれの名前空間内の Run() を呼び出す
+    if (choice == 1) {
+        std::cout << "Starting Waveform Analysis App...\n";
+        return App_Analysis::Run();
     }
-    // GUI終了処理
-    Gui::Shutdown();
-    return 0;
-}
-
-// ウィンドウの定義
-void ShowWindow1(const char title[]) {
-    static std::string text = "";
-    static double frequency = 10e3;
-    static double amplitude = 1.0;
-    static double phase_deg = 0.0;
-    static double noise = 0.0; // 追加
-    // ウィンドウ開始
-    ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowSize(ImVec2(660 * Gui::monitorScale, 220 * Gui::monitorScale), ImGuiCond_FirstUseEver);
-    ImGui::Begin(title);
-    /*** 描画したいImGuiのWidgetやImPlotのPlotをここに記述する ***/
-    if (ImGui::Button("Save")) {
-        // ボタンが押されたらここが実行される
-        text = "Success.";
+    else if (choice == 2) {
+        std::cout << "Starting Bode Sweep App...\n";
+        return App_Sweep::Run();
     }
-    ImGui::SameLine();
-    ImGui::Text(text.c_str());
-    // ウィンドウ終了
-    ImGui::End();
+    else {
+        std::cout << "Unknown selection.\n";
+        return -1;
+    }
 }
