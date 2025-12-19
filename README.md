@@ -1,3 +1,56 @@
+# ImPlotSample - Waveform Analysis & Bode Plot Fork
+
+This project is a fork of [daigokk/ImPlotSample](https://github.com/daigokk/ImPlotSample).  
+This fork extends the original ImPlot implementation to include real-time instrument control via VISA, Bode plot sweeping, and waveform analysis.
+
+本プロジェクトは `daigokk/ImPlotSample` をフォークし、VISAライブラリを用いた計測機器（オシロスコープ・ファンクションジェネレータ）の制御機能と、波形解析・ボード線図作成機能を追加したものです。
+
+## Added Features (追加機能)
+
+### 1. Waveform Analysis App (波形解析・フィルタ)
+- **Signal Generation**: Generate waveforms (Sine, Square, Triangle, Sawtooth) via Simulation or Function Generator (VISA).
+- **Oscilloscope Capture**: Fetch real-time waveform data from a connected oscilloscope via VISA.
+- **Digital Filter**: Apply LPF, HPF, BPF to the signal and view results in real-time.
+- **FFT Analysis**: Real-time FFT display of raw and filtered signals.
+- **CSV Export**: Save captured waveforms and FFT data.
+
+### 2. Bode Plot Sweep App (ボード線図スイープ)
+- **Frequency Sweep**: Automatically controls the Function Generator to sweep frequencies.
+- **Gain/Phase Calculation**: Fetches Input/Output waveforms from the Oscilloscope and calculates Gain (dB) and Phase (deg) using relative phase PSD.
+- **Real-time Plotting**: Plots the Bode diagram (Gain & Phase) in real-time during the sweep.
+
+## Prerequisites (必須環境)
+
+To build and run this project, you need a VISA library installed:
+ビルドおよび実行には VISA ライブラリが必要です。
+
+- **NI-VISA** or **Keysight IO Libraries Suite**
+- **Architecture**: x64 (Required for `visa64.lib`)
+
+## Build Settings (ビルド設定)
+
+1. **Platform**: Set Visual Studio build platform to **`x64`**.
+2. **Linker**: Ensure the VISA library path is added to the Linker settings.
+   - Typically: `C:\Program Files\IVI Foundation\VISA\Win64\Lib_x64\msc`
+   - Library file: `visa64.lib`
+
+## Usage (使い方)
+
+Run the application and select the mode in the console:
+
+```text
+========================================
+ Select Application to Run:
+========================================
+ 1. Waveform Analysis & Filter
+ 2. Bode Plot & Sweep Control
+========================================
+ Enter number (1 or 2):
+```
+
+
+The following is the same as the original fork:
+
 # ImPlotSample
 このリポジトリ(ソースコードやファイルを一元的に管理する場所)が管理しているプログラムは[ImPlot](https://github.com/epezent/implot)をVisual Studioで利用するためのひな型です。ImPlotを使うためには、環境に合わせたいくつかの作業が必要になり、それをショートカットするために用意しました。ご自身で0から環境構築をしたい場合、本ページ内のリンク先等が参考になります。
 
