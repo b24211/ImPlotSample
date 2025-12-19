@@ -4,6 +4,7 @@ This project is a fork of [daigokk/ImPlotSample](https://github.com/daigokk/ImPl
 This fork extends the original ImPlot implementation to include real-time instrument control via VISA, Bode plot sweeping, and waveform analysis.
 
 本プロジェクトは `daigokk/ImPlotSample` をフォークし、VISAライブラリを用いた計測機器（オシロスコープ・ファンクションジェネレータ）の制御機能と、波形解析・ボード線図作成機能を追加したものです。
+そんなに安定して動作するわけではありません。
 
 ## Added Features (追加機能)
 
